@@ -34,10 +34,19 @@ if ($appEngine->isAuthenticationActive())
   $u->name=$appEngine->getSessionUsername();
   
   $roles=$appEngine->getAclManager()->getRolesOfUser($u);
+
+  $oUser = new \svnadmin\core\entities\User;
+  $oUser->id = $u->name;
+  $oUser->name = $u->name;
+ 
+  $paths = $appEngine->getAccessPathViewProvider()->getPathsOfUser( $oUser );
+  usort( $paths, array('\svnadmin\core\entities\AccessPath',"compare") );
+
   sort($roles);
 }
 
 SetValue("PHPVersion", $phpVersion);
 SetValue("Roles", $roles);
+SetValue("PathList", $paths);
 ProcessTemplate("index.html.php");
 ?>

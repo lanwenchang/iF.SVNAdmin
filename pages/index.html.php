@@ -50,5 +50,28 @@
   </tbody>
 </table>
 
+<h2><?php Translate("Permissions of users"); ?></h2>
+<table id="userpermissionlist" class="datatable">
+	<thead>
+	<tr>
+	  <th width="45" style="text-align: -internal-center">#</th>
+	  <th><?php Translate("Access-Path"); ?></th>
+	  <th><?php Translate("Permission"); ?></th>
+	  <th><?php Translate("Inherit from Group"); ?></th>
+	</tr>
+	</thead>
+
+        <tbody>
+  <?php foreach (GetArrayValue("PathList") as $ap) { ?>
+        <tr>
+          <td><?php if (!empty($ap->inherited)) { ?> 继承组 <?php } ?></td>
+          <td><?php print($ap->path); ?></td>
+          <td><?php print($ap->perm); ?></td>
+          <td><?php print($ap->inherited); ?></td>
+        </tr>
+        <?php } ?>
+        </tbody>
+</table>
+
 
 <?php GlobalFooter(); ?>
